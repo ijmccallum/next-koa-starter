@@ -7,6 +7,9 @@ const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 const koaServer = new Koa();
 
+require("pretty-error").start();
+require("dotenv").config();
+
 // cors
 const cors = require("@koa/cors");
 koaServer.use(cors());

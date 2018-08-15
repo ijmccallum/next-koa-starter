@@ -3,7 +3,7 @@ const dbSeed = require("./db/seed.js");
 
 const initConnection = function() {
   function connect() {
-    mongoose.connect("mongodb://mongodb/onboard");
+    mongoose.connect(process.env.MONGODB_CONNECTION_URL);
   }
 
   if (process.env.NODE_ENV !== "test") {

@@ -1,53 +1,41 @@
 {
-  "name": "onboard",
+  "name": "with-jest-typescript",
   "version": "1.0.0",
-  "description": "Allaboard",
-  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "test": "jest",
+    "dev": "node server.js",
     "build": "next build",
-    "x-start": "NODE_ENV=develop nodemon ./api/server.js",
-    "x-test": "NODE_ENV=test nyc mocha --compilers babel-register './api/**/*.spec.js'"
+    "start": "NODE_ENV=production node server.js"
   },
-  "nyc": {
-    "exclude": [
-      "**/*.spec.js",
-      "node_modules",
-      ".nyc_output",
-      "api/server.js"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://gitlab.com/ijmccallum/onboard.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://gitlab.com/ijmccallum/onboard/issues"
-  },
-  "homepage": "https://gitlab.com/ijmccallum/onboard#README",
   "dependencies": {
     "@koa/cors": "^2.2.2",
     "bcrypt": "^3.0.0",
+    "dotenv": "^6.0.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-passport": "^4.1.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.2",
-    "mongoose": "^5.2.5",
-    "next": "^6.1.1",
+    "mongoose": "^5.2.8",
+    "next": "^6.0.0",
     "passport-local": "^1.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "pretty-error": "^2.1.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "babel-register": "^6.26.0",
-    "dotenv": "^6.0.0",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.3",
-    "nyc": "^12.0.2",
-    "pretty-error": "^2.1.1",
-    "supertest": "^3.1.0"
+    "@types/jest": "^23.0.0",
+    "@types/next": "^2.4.8",
+    "@types/react": "^16.0.41",
+    "@types/react-dom": "^16.0.4",
+    "@zeit/next-typescript": "1.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "23.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^23.1.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.2.0",
+    "typescript": "^2.7.2"
   }
 }

@@ -1,12 +1,9 @@
 const router = require("koa-router")();
-const postUser = require("./post.js");
-const getUsers = require("./get.js");
-const deleteUsers = require("./delete.js");
 require("./userSchema.js"); //runs on require?
 
 router
-  .post("/api/users/", postUser)
-  .get("/api/users/", getUsers)
-  .delete("/api/users/", deleteUsers);
+  .post("/api/users/", require("./post.js"))
+  .get("/api/users/", require("./get.js"))
+  .delete("/api/users/", require("./delete.js"));
 
 module.exports = router;
