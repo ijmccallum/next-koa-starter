@@ -1,5 +1,5 @@
 const assert = require("assert");
-const getUsers = require("./get.js");
+const getUsers = require("./get.ts");
 
 describe("GET users ", function() {
   it("If authenticated, adds an array of users to the return object", () => {

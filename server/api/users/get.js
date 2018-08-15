@@ -1,16 +1,15 @@
-const userQueries = require("./userQueries.js");
-
+const userQueries = require("./userQueries.ts");
 const getUsers = async (ctx, next) => {
-  if (!ctx.isAuthenticated()) {
-    ctx.status = 401;
-  }
-  if (ctx.isAuthenticated()) {
-    if (!ctx.body) {
-      ctx.body = {};
+    if (!ctx.isAuthenticated()) {
+        ctx.status = 401;
     }
-    ctx.body.users = await userQueries.findAll();
-  }
-
-  next();
+    if (ctx.isAuthenticated()) {
+        if (!ctx.body) {
+            ctx.body = {};
+        }
+        ctx.body.users = await userQueries.findAll();
+    }
+    next();
 };
 module.exports = getUsers;
+//# sourceMappingURL=get.js.map

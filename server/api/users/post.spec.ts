@@ -1,21 +1,16 @@
 const assert = require("assert");
-const getMe = require("./get.js");
+const postUser = require("./post.ts");
 
-describe("GET me ", function() {
-  it("If logged in, returns your user object", () => {
+describe("POST user ", function() {
+  it("calls the user creation ... method? module?", () => {
     let ctx = {
       body: {},
       isAuthenticated: () => {
         return true;
-      },
-      state: {
-        user: {
-          user: "things"
-        }
       }
     };
-    getMe(ctx, () => {
-      assert.ok(typeof ctx.body.me == "object");
+    postUser(ctx, () => {
+      assert.ok(ctx.body.user);
     });
   });
 
@@ -26,9 +21,9 @@ describe("GET me ", function() {
         return false;
       }
     };
-    getMe(ctx, () => {
+    postUser(ctx, () => {
       assert.equal(ctx.status, 401);
-      assert.ok(!ctx.body.me);
+      assert.ok(!ctx.body.user);
     });
   });
 });

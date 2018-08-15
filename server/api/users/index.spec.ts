@@ -1,5 +1,5 @@
 const assert = require("assert");
-const userRouter = require("./index.js");
+const userRouter = require("./index.ts");
 
 describe("/api/users ", function() {
   it("returns a router listening to /api/users/", () => {
