@@ -1,1 +1,10 @@
-Next.js Koa.js starter with built in API and local auth
+# App starter
+
+`npm i` - `npm start`
+
+- Next.js
+- Koa.js
+- TypeScript
+- Custom API routes
+- Local auth
+- one node to rule them all!
