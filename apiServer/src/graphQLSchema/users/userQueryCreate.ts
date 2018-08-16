@@ -1,6 +1,6 @@
 import UserModel from "./userModel";
 import hasher from "../../auth/hasher";
-import findByEmail from "./findByEmail";
+import findByEmail from "./userQueryFindByEmail";
 
 const create = ({
   email,

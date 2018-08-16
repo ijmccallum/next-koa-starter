@@ -1,5 +1,5 @@
 import UserModel from "./userModel";
-import findById from "./findById";
+import findById from "./userQueryFindById";
 
 const remove = (id: String) => {
   return new Promise(async (resolve, reject) => {
