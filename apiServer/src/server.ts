@@ -1,6 +1,10 @@
 import Koa = require("koa");
 import Router = require("koa-router");
+import graphqlHTTP = require("koa-graphql");
+import appGraphQLSchema from "./graphQLSchema";
+import dbConnect from "./db/connect";
 
+dbConnect();
 const koaServer = new Koa();
 
 import * as prettyError from "pretty-error";
@@ -24,13 +28,22 @@ import bodyParser = require("koa-bodyparser");
 koaServer.use(bodyParser());
 
 // authentication
-import initPassport from "./auth/passport";
-initPassport();
-import passport = require("koa-passport");
-koaServer.use(passport.initialize());
-koaServer.use(passport.session());
+// import initPassport from "./auth/passport";
+// initPassport();
+// import passport = require("koa-passport");
+// koaServer.use(passport.initialize());
+// koaServer.use(passport.session());
 
 const router = new Router();
+
+router.all(
+  "/graphql",
+  graphqlHTTP({
+    schema: appGraphQLSchema,
+    graphiql: true
+  })
+);
+
 router.get("/*", async ctx => {
   ctx.body = "hi";
 });

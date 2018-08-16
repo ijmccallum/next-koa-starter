@@ -11,8 +11,8 @@
 
 ## TODO:
 
-- api server running in TS land
-- next app running
-- one ring mounting both
-- next app pulling data from api
-- graphql server
+- api gql no duplicate users
+- test api user gql
+- api server TS no any
+- next app talking to graphQL
+- api server auth
