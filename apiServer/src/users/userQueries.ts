@@ -1,8 +1,8 @@
 const UserModel = require("./userSchema.ts");
 
-const findByEmail = email => {
+const findByEmail = (email: String) => {
   return new Promise((resolve, reject) => {
-    UserModel.findOne({ email }, (err, user) => {
+    UserModel.findOne({ email }, (err: Error, user: Object) => {
       if (err) {
         reject(err);
         return;
@@ -12,11 +12,11 @@ const findByEmail = email => {
   });
 };
 
-const findById = _id => {
+const findById = (_id: String) => {
   return new Promise((resolve, reject) => {
     UserModel.findOne({ _id: _id })
       // .populate("padawans")s
-      .exec((err, user) => {
+      .exec((err: Error, user: Object) => {
         if (err) {
           reject(err);
           return;
@@ -28,7 +28,7 @@ const findById = _id => {
 
 const findAll = () => {
   return new Promise((resolve, reject) => {
-    UserModel.find((err, users) => {
+    UserModel.find((err: Error, users: Array<Object>) => {
       if (err) {
         reject(err);
         return;
@@ -38,7 +38,7 @@ const findAll = () => {
   });
 };
 
-const create = userObj => {
+const create = (userObj: { email: String }) => {
   return new Promise(async (resolve, reject) => {
     if (!userObj.email) {
       reject("new user re quires an email");
@@ -49,7 +49,7 @@ const create = userObj => {
       reject("user already exists");
       return;
     }
-    UserModel.create(userObj, (err, user) => {
+    UserModel.create(userObj, (err: Error, user: Object) => {
       if (err) {
         reject(err);
         return;
@@ -59,7 +59,7 @@ const create = userObj => {
   });
 };
 
-const remove = _id => {
+const remove = (_id: String) => {
   return new Promise(async (resolve, reject) => {
     if (!_id) {
       reject("_id is required to delete a user");
@@ -72,7 +72,7 @@ const remove = _id => {
       return;
     }
 
-    UserModel.remove({ _id }, (err, res) => {
+    UserModel.remove({ _id }, (err: Error, res: Object) => {
       if (err) {
         reject(err);
         return;
@@ -82,7 +82,7 @@ const remove = _id => {
   });
 };
 
-module.exports = {
+export default {
   findByEmail,
   findById,
   findAll,

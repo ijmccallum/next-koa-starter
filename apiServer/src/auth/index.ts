@@ -1,6 +1,8 @@
-var router = require("koa-router")();
-const login = require("./login.ts");
-const logout = require("./logout.ts");
+import Router = require("koa-router");
+import login from "./login";
+import logout from "./logout";
+
+const router = new Router();
 
 // /api/auth
 router.post("/api/auth/login", login);

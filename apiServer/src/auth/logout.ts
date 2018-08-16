@@ -11,4 +11,4 @@ const logout = async (ctx, next) => {
   next();
 };
 
-module.exports = logout;
+export default logout;

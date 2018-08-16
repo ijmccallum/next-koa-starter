@@ -1,48 +1,54 @@
-import * as Koa from "koa";
-import * as Router from "koa-router";
-const { parse } = require("url");
-const next = require("next");
-const dev = process.env.NODE_ENV !== "production";
-const nextApp = next({ dev });
-const handle = nextApp.getRequestHandler();
+import Koa = require("koa");
+import Router = require("koa-router");
+
 const koaServer = new Koa();
 
-require("pretty-error").start();
-require("dotenv").config();
+import * as prettyError from "pretty-error";
+prettyError.start();
+
+import dotenv = require("dotenv");
+dotenv.config();
 
 // cors
-const cors = require("@koa/cors");
+import cors = require("@koa/cors");
 koaServer.use(cors());
 koaServer.proxy = true;
 
 // sessions
-const session = require("koa-session");
+import session = require("koa-session");
 koaServer.keys = ["your-session-secret"];
 koaServer.use(session({}, koaServer));
 
 // body
-const bodyParser = require("koa-bodyparser");
+import bodyParser = require("koa-bodyparser");
 koaServer.use(bodyParser());
 
 // authentication
-require("./api/auth/passport");
-const passport = require("koa-passport");
+import initPassport from "./auth/passport";
+initPassport();
+import passport = require("koa-passport");
 koaServer.use(passport.initialize());
 koaServer.use(passport.session());
 
 const router = new Router();
+router.get("/*", async ctx => {
+  ctx.body = "hi";
+});
 
 // API ROUTES
-koaServer
-  .use(require("./api/auth").routes())
-  .use(require("./api/me").routes())
-  .use(require("./api/locales").routes())
-  .use(require("./api/users").routes());
+// koaServer
+//   .use(require("./api/auth").routes())
+//   .use(require("./api/me").routes())
+//   .use(require("./api/locales").routes())
+//   .use(require("./api/users").routes());
 
 koaServer.use(router.routes()).use(router.allowedMethods());
 
 const port = process.env.PORT || 3000;
-koaServer.listen(port, err => {
-  if (err) throw err;
+koaServer.listen(port, () => {
   console.log(`> Ready on port ${port}...`);
+});
+
+koaServer.on("error", (err: any) => {
+  throw err;
 });

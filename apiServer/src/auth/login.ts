@@ -1,8 +1,8 @@
-const passport = require("koa-passport");
-const userQuerires = require("../users/userQueries.ts");
+import passport = require("koa-passport");
+// import userQueries from "../users/userQueries";
 
-const postLogin = async (ctx, next) => {
-  const user = await userQuerires.findByEmail(ctx.request.body.email);
+const postLogin = async ctx => {
+  // const user = await userQueries.findByEmail(ctx.request.body.email);
 
   return passport.authenticate("local", (err, user, info, status) => {
     if (user) {
@@ -18,4 +18,4 @@ const postLogin = async (ctx, next) => {
   })(ctx);
 };
 
-module.exports = postLogin;
+export default postLogin;

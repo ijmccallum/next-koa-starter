@@ -15,3 +15,4 @@
 - next app running
 - one ring mounting both
 - next app pulling data from api
+- graphql server
