@@ -1,6 +1,6 @@
-const passport = require("koa-passport");
-const userQueries = require("../users/userQueries.ts");
-const hasher = require("./hasher.ts");
+import passport = require("koa-passport");
+import userQueries from "../graphQLSchema/users/userQueries";
+import hasher from "./hasher";
 
 const initPassport = function() {
   passport.serializeUser(function(user: { email: String }, done: Function) {

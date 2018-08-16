@@ -28,13 +28,20 @@ import bodyParser = require("koa-bodyparser");
 koaServer.use(bodyParser());
 
 // authentication
-// import initPassport from "./auth/passport";
-// initPassport();
-// import passport = require("koa-passport");
-// koaServer.use(passport.initialize());
-// koaServer.use(passport.session());
+import initPassport from "./auth/passport";
+initPassport();
+import passport = require("koa-passport");
+koaServer.use(passport.initialize());
+koaServer.use(passport.session());
 
 const router = new Router();
+
+router.all("/graphql", async (ctx, next) => {
+  if (!ctx.isAuthenticated()) {
+    ctx.status = 401;
+  }
+  next();
+});
 
 router.all(
   "/graphql",
