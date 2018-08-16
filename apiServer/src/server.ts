@@ -1,7 +1,7 @@
 import Koa = require("koa");
 import Router = require("koa-router");
 import graphqlHTTP = require("koa-graphql");
-import appGraphQLSchema from "./graphQLSchema";
+import appGraphQLSchema from "./graphQLSchema/gqlSchema";
 import dbConnect from "./db/connect";
 
 dbConnect();

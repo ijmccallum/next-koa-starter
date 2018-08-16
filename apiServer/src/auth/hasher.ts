@@ -24,7 +24,7 @@ const compare = ({ password, hash }: { password: String; hash: String }) => {
   });
 };
 
-module.exports = {
+export default {
   hash,
   compare
 };
