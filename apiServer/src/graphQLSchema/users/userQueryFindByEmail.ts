@@ -1,8 +1,8 @@
-import UserModel from "./userModel";
+import UserModel, { UserInterface } from "./userModel";
 
 const findByEmail = (email: String) => {
   return new Promise((resolve, reject) => {
-    UserModel.findOne({ email }, (err: Error, user: Object) => {
+    UserModel.findOne({ email }, (err: Error, user: UserInterface) => {
       if (err) {
         reject(err);
         return;

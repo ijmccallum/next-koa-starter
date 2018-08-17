@@ -9,4 +9,12 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+interface UserInterface {
+  username: String;
+  password: String;
+  email: String;
+  created: String;
+}
+
 export default User;
+export { UserInterface };

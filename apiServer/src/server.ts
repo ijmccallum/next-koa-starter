@@ -36,11 +36,13 @@ koaServer.use(passport.session());
 
 const router = new Router();
 
+//authenticate all access to graphql queries
 router.all("/graphql", async (ctx, next) => {
-  if (!ctx.isAuthenticated()) {
+  if (ctx.isAuthenticated()) {
     ctx.status = 401;
+    return;
   }
-  next();
+  await next();
 });
 
 router.all(
@@ -55,14 +57,10 @@ router.get("/*", async ctx => {
   ctx.body = "hi";
 });
 
-// API ROUTES
-// koaServer
-//   .use(require("./api/auth").routes())
-//   .use(require("./api/me").routes())
-//   .use(require("./api/locales").routes())
-//   .use(require("./api/users").routes());
-
-koaServer.use(router.routes()).use(router.allowedMethods());
+koaServer
+  .use(require("./auth").routes()) // /api/auth/login etc
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 const port = process.env.PORT || 3000;
 koaServer.listen(port, () => {

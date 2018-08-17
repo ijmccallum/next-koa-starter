@@ -1,21 +1,29 @@
 import passport = require("koa-passport");
 // import userQueries from "../users/userQueries";
 
-const postLogin = async ctx => {
+const postLogin = async (ctx: any, next: any) => {
   // const user = await userQueries.findByEmail(ctx.request.body.email);
 
-  return passport.authenticate("local", (err, user, info, status) => {
+  const authResHandler = (
+    err: Error,
+    user: { id: String; username: String; email: String }
+  ) => {
+    if (err) {
+      throw err;
+    }
     if (user) {
       ctx.login(user);
       ctx.body = {
-        _id: user._id,
-        name: user.name,
+        id: user.id,
+        username: user.username,
         email: user.email
       };
     } else {
       ctx.body = { status: "error" };
     }
-  })(ctx);
+  };
+
+  return passport.authenticate("local", authResHandler)(ctx, next);
 };
 
 export default postLogin;
