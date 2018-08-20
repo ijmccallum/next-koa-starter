@@ -3,12 +3,11 @@ import EmailInput from "../FormFields/EmailInput";
 
 interface SignUpFormProps {
   onSubmit: Function;
+  email: string;
 }
 
 interface SignUpFormState {
   emailValue: string;
-  emailErrored: boolean;
-  emailErrorMessage: string;
 }
 
 class SignUpForm extends React.Component<SignUpFormProps, SignUpFormState> {
@@ -16,14 +15,17 @@ class SignUpForm extends React.Component<SignUpFormProps, SignUpFormState> {
     super(props);
 
     this.state = {
-      emailValue: "",
-      emailErrored: false,
-      emailErrorMessage: ""
+      emailValue: props.email || ""
     };
+
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  public onFormSubmit(e) {
+  private onFormSubmit(e) {
     console.log("form submission!", e);
+    this.props.onSubmit({
+      email: this.state.emailValue
+    });
   }
 
   render() {
@@ -34,8 +36,6 @@ class SignUpForm extends React.Component<SignUpFormProps, SignUpFormState> {
           name={"Sign up email"}
           value={this.state.emailValue}
           label="Email"
-          errored={this.state.emailErrored}
-          errorText={this.state.emailErrorMessage}
           onChange={newValue => {
             this.setState({
               emailValue: newValue

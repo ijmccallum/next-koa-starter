@@ -9,7 +9,7 @@ describe("TextInput", () => {
   const wrapper = shallow(
     <TextInput
       id="textInputter"
-      name="is_available"
+      name="input name"
       value="hello"
       label="Text input label"
       onChange={mockCallback}
@@ -49,7 +49,7 @@ describe("TextInput", () => {
     const nonErroredWrapper = shallow(
       <TextInput
         id="textInputter"
-        name="is_available"
+        name="input name"
         value="hello"
         label="Text input label"
         onChange={mockCallback}

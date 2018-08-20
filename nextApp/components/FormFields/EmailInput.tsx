@@ -1,16 +1,12 @@
 import * as React from "react";
-import TextInput from "../FormFields/TextInput";
-
-/**
- * Wraps the simple input component with validation for emails
- */
+import emailValidator from "./emailValidator";
 
 interface EmailInputProps {
   id: string;
   name: string;
   label: string;
-  email: string;
-  onEmailChange: Function;
+  value: string;
+  onChange: Function;
 }
 
 interface EmailInputState {
@@ -23,42 +19,54 @@ class EmailInput extends React.Component<EmailInputProps, EmailInputState> {
   constructor(props: EmailInputProps) {
     super(props);
 
+    let emailErrored = false;
+    if (props.value !== "") {
+      if (!emailValidator(props.value)) {
+        emailErrored = true;
+      }
+    }
+
     this.state = {
-      emailValue: props.email || "",
-      emailErrored: false,
-      emailErrorMessage: ""
+      emailValue: props.value || "",
+      emailErrored: emailErrored,
+      emailErrorMessage: "Please enter a valid email"
     };
   }
 
-  public onEmailChange(newValue) {
-    // ?@??.?? <- email will be at least that
-    if (/(.+)@(.+){2,}\.(.+){2,}/.test(newValue)) {
+  private onEmailChange(newValue) {
+    if (emailValidator(newValue)) {
       this.setState({
         emailValue: newValue,
         emailErrored: false,
         emailErrorMessage: ""
       });
-      this.props.onEmailChange(newValue);
+      console.log("---------- SETTING EMAIL", newValue);
+      this.props.onChange(newValue);
     } else {
       this.setState({
         emailValue: newValue,
-        emailErrored: true,
-        emailErrorMessage: "Please enter a valid email"
+        emailErrored: true
       });
     }
   }
 
   render() {
     return (
-      <TextInput
-        id={this.props.id}
-        name={this.props.name}
-        value={this.state.emailValue}
-        label={this.props.label}
-        errored={this.state.emailErrored}
-        errorText={this.state.emailErrorMessage}
-        onChange={this.onEmailChange}
-      />
+      <div>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
+        <input
+          type="email"
+          id={this.props.id}
+          name={this.props.name}
+          value={this.state.emailValue}
+          onChange={e => {
+            this.onEmailChange(e.target.value);
+          }}
+        />
+        {this.state.emailErrored && (
+          <p data-testid="emailinput-error">{this.state.emailErrorMessage}</p>
+        )}
+      </div>
     );
   }
 }

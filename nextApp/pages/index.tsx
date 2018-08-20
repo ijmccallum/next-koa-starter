@@ -2,7 +2,7 @@ import SignUpForm from "../components/SignUpForm/SignUpForm";
 
 const IndexPage = () => (
   <div>
-    <h1>Testing Next.js App written in TypeScript with Jest</h1>
+    <h1>App</h1>
     <SignUpForm />
   </div>
 );

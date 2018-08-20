@@ -5,25 +5,14 @@ import { shallow } from "enzyme";
 import SignUpForm from "./SignUpForm";
 
 describe("SignUpForm", () => {
-  const mockCallback = jest.fn();
-  const wrapper = shallow(
-    <SignUpForm
-      id="textInputter"
-      name="is_available"
-      value="hello"
-      label="Text input label"
-      onChange={mockCallback}
-      errored={true}
-      errorText="errored"
-    />
-  );
-
-  it('renders an input[type="text"] with correct attributes', () => {
-    expect(wrapper.find("label").text()).toEqual("Text input label");
+  it("Passes the form values to onSubmit on submit", () => {
+    const submitCb = jest.fn();
+    const wrapper = shallow(<SignUpForm email="emailyo" onSubmit={submitCb} />);
+    wrapper.simulate("submit");
     //label for matches input id
-    expect(wrapper.find("label").props().htmlFor).toEqual(
-      wrapper.find("#textInputter").props().id
-    );
-    expect(wrapper.find("#textInputter").props().value).toEqual("hello");
+    expect(submitCb.mock.calls.length).toBe(1);
+    expect(submitCb.mock.calls[0][0]).toEqual({
+      email: "emailyo"
+    });
   });
 });
