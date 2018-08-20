@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
-    "dev": "next",
+    "start": "next",
     "build": "next build",
-    "start": "next start"
+    "run": "next start"
   },
   "dependencies": {
     "next": "^6.0.0",

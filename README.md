@@ -17,12 +17,18 @@
 - `cd apiServer`
 - `npm i`
 - `npm start`
+- open [localhost:3000/graphql](http://localhost:3000/graphql)
 
 ## Next.js server
 
 - `cd nextApp`
 - `npm i`
 - `npm start`
+
+### Client side todos:
+
+- log in / sign up form on the home page
+- user profile page
 
 ## oneRing
 
