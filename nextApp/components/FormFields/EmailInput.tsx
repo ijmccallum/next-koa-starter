@@ -40,7 +40,6 @@ class EmailInput extends React.Component<EmailInputProps, EmailInputState> {
         emailErrored: false,
         emailErrorMessage: ""
       });
-      console.log("---------- SETTING EMAIL", newValue);
       this.props.onChange(newValue);
     } else {
       this.setState({

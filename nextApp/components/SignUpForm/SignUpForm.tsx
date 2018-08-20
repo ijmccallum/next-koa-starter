@@ -22,7 +22,6 @@ class SignUpForm extends React.Component<SignUpFormProps, SignUpFormState> {
   }
 
   private onFormSubmit(e) {
-    console.log("form submission!", e);
     this.props.onSubmit({
       email: this.state.emailValue
     });
@@ -33,6 +32,7 @@ class SignUpForm extends React.Component<SignUpFormProps, SignUpFormState> {
       <form onSubmit={this.onFormSubmit}>
         <EmailInput
           id={"signup-email"}
+          data-testid="signup-email"
           name={"Sign up email"}
           value={this.state.emailValue}
           label="Email"
